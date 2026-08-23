@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Informações Gerais</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333; }
+        .panic-btn { position: fixed; top: 10px; right: 10px; background-color: #d9534f; color: white; border: none; padding: 12px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; z-index: 1000; }
+        .emergency-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .btn-call { display: inline-block; background: #0275d8; color: white; padding: 10px 15px; margin: 5px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .quiz-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
+        .btn-ans { background: #f0f0f0; border: 1px solid #ccc; padding: 10px 20px; margin: 10px 5px; cursor: pointer; border-radius: 4px; font-size: 16px; }
+        .btn-ans:hover { background: #e0e0e0; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <button class="panic-btn" onclick="panicExit()">SAIR AGORA</button>
+
+    <div class="quiz-container">
+        <h2>Autoavaliação de Bem-Estar</h2>
+        <p>Este é um espaço seguro e anônimo. Suas respostas não são salvas na internet.</p>
+
+        <div class="emergency-box">
+            <h3>🚨 Ajuda Imediata</h3>
+            <a href="tel:190" class="btn-call" style="background-color: #d9534f;">Ligar 190 (PM)</a>
+            <a href="tel:180" class="btn-call" style="background-color: #f0ad4e;">Ligar 180 (Mulher)</a>
+            
+            <div style="margin-top: 15px;">
+                <label>Configurar Contato de Confiança (Salvo apenas no seu celular):</label><br>
+                <input type="tel" id="trustPhone" placeholder="Ex: 5573999999999" style="padding: 6px; width: 220px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <button onclick="saveContact()" style="padding: 6px 12px; cursor: pointer;">Salvar</button>
+            </div>
+            <button id="sendAlertBtn" class="btn-call" style="background-color: #5cb85c; display: none; margin-top: 10px;" onclick="sendSecretMessage()">💬 SOS Contato de Confiança</button>
+        </div>
+
+        <div id="quizBox">
+            <div id="questionArea">
+                <p id="questionText" style="font-size: 18px; font-weight: bold;"></p>
+                <button class="btn-ans" onclick="nextQuestion(true)">Sim</button>
+                <button class="btn-ans" onclick="nextQuestion(false)">Não</button>
+            </div>
+            <div id="resultArea" class="hidden">
+                <h3>Resultado da Avaliação</h3>
+                <p id="resultText" style="font-size: 16px; line-height: 1.5;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            "1. O seu parceiro controla as roupas que você usa, suas redes sociais ou com quem você conversa?",
+            "2. Ele costuma ridicularizar suas opiniões, crenças ou seu corpo na frente de outras pessoas?",
+            "3. Você se sente culpada ou com medo quando ele fica em silêncio ou demonstra insatisfação?",
+            "4. Ele já destruiu ou escondeu objetos seus (celular, documentos, roupas) durante uma discussão?",
+            "5. Ele tenta afastar você dos seus familiares, amigos ou colegas de trabalho?",
+            "6. Ele controla o seu dinheiro, impede você de trabalhar ou exige que preste contas de cada centavo?",
+            "7. Você já mudou o seu comportamento ou deixou de fazer algo por medo da reação dele?",
+            "8. Ele já fez ameaças de se machucar ou de machucar pessoas queridas caso você o deixe?",
+            "9. Você já foi forçada ou pressionada a ter relações íntimas quando não queria?",
+            "10. Ele já usou de força física contra você (empurrões, segurar com força, tapas), mesmo que tenha pedido desculpas depois?"
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById('questionText').innerText = questions[currentQuestion];
+            } else {
+                showResult();
+            }
+        }
+
+        function nextQuestion(isYes) {
+            if(isYes) score++;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('questionArea').classList.add('hidden');
+            document.getElementById('resultArea').classList.remove('hidden');
+            
+            const resultText = document.getElementById('resultText');
+            if (score >= 7) {
+                resultText.innerHTML = "<strong>Alerta Alto:</strong> Suas respostas indicam que você está vivenciando uma situação de violência severa e perigo iminente. Busque proteção imediatamente utilizando os botões de emergência acima. Você não está sozinha.";
+            } else if (score >= 4) {
+                resultText.innerHTML = "<strong>Alerta Moderado:</strong> Existem sinais claros de comportamento abusivo e controle no seu relacionamento. Esse ciclo tende a aumentar com o tempo. Considere conversar com profissionais ou ligar para o 180 para orientações seguras.";
+            } else if (score >= 1) {
+                resultText.innerHTML = "<strong>Atenção Inicial:</strong> Alguns comportamentos identificados servem como sinais de alerta (red flags). Fique atenta a comportamentos de controle e ciúme excessivo. Relacionamentos saudáveis são baseados em respeito mútuo.";
+            } else {
+                resultText.innerHTML = "Sua avaliação não indicou sinais de relacionamento abusivo. Continue priorizando o respeito mútuo, sua liberdade e seu bem-estar emocional.";
+            }
+        }
+
+        function panicExit() {
+            window.location.replace("https://google.com.br");
+        }
+
+        function saveContact() {
+            const phone = document.getElementById('trustPhone').value.trim();
+            if(phone) {
+                localStorage.setItem('safe_contact', phone);
+                alert('Contato configurado com sucesso no seu aparelho.');
+                checkSavedContact();
+            }
+        }
+
+        function checkSavedContact() {
+            const saved = localStorage.getItem('safe_contact');
+            if(saved) {
+                document.getElementById('sendAlertBtn').style.display = 'inline-block';
+                document.getElementById('trustPhone').value = saved;
+            }
+        }
+
+        function sendSecretMessage() {
+            const phone = localStorage.getItem('safe_contact');
+            const text = encodeURIComponent("Preciso de ajuda urgente. Não posso falar agora. Venha me buscar ou ligue para as autoridades.");
+            if(phone) {
+                window.open(`https://whatsapp.com{phone}&text=${text}`, '_blank');
+            }
+        }
+
+        window.onload = function() {
+            checkSavedContact();
+            showQuestion();
+        };
+    </script>
+</body>
+</html>
