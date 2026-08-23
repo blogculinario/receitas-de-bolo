@@ -5,24 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Informações Gerais</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333; }
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333; margin: 0; }
         .panic-btn { position: fixed; top: 10px; right: 10px; background-color: #d9534f; color: white; border: none; padding: 12px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; z-index: 1000; }
         .emergency-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
         .btn-call { display: inline-block; background: #0275d8; color: white; padding: 10px 15px; margin: 5px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .quiz-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 20px auto; }
         .btn-ans { background: #f0f0f0; border: 1px solid #ccc; padding: 10px 20px; margin: 10px 5px; cursor: pointer; border-radius: 4px; font-size: 16px; }
         .btn-ans:hover { background: #e0e0e0; }
         .hidden { display: none; }
+        
+        /* Estilos do Disfarce */
+        .recipe-header { cursor: pointer; color: #d9534f; text-decoration: underline; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 15px; border-radius: 4px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
     </style>
 </head>
 <body>
 
+    <!-- BOTÃO DE PÂNICO GLOBAL -->
     <button class="panic-btn" onclick="panicExit()">SAIR AGORA</button>
 
-    <div class="quiz-container">
-        <h2>Autoavaliação de Bem-Estar</h2>
-        <p>Este é um espaço seguro e anônimo. Suas respostas não são salvas na internet.</p>
+    <!-- TELA 1: O DISFARCE (Receita de Bolo Falsa) -->
+    <div class="container" id="recipeScreen">
+        <h1 class="recipe-header" onclick="revealSecretQuiz()">Bolo de Cenoura Fofinho com Chocolate</h1>
+        <p><em>Dica: Clique no título acima para ver informações adicionais de nutrição.</em></p>
+        <hr>
+        <h3>Ingredientes:</h3>
+        <ul>
+            <li>3 cenouras médias raladas</li>
+            <li>4 ovos inteiros</li>
+            <li>1 xícara de óleo de soja</li>
+            <li>2 xícaras de açúcar</li>
+            <li>2 xícaras de farinha de trigo</li>
+            <li>1 colher de sopa de fermento em pó</li>
+        </ul>
+        <h3>Modo de Preparo:</h3>
+        <p>1. Bata no liquidificador as cenouras, os ovos e o óleo até obter uma massa homogênea.</p>
+        <p>2. Despeje em uma tigela com o açúcar e a farinha, misturando bem.</p>
+        <p>3. Adicione o fermento por último e asse por 40 minutos em forno médio.</p>
+    </div>
 
+    <!-- TELA 2: O PORTAL SECRETO (Escondido por padrão) -->
+    <div class="container hidden" id="secretScreen">
+        <h2>Autoavaliação e Autodefesa</h2>
+        <p>Espaço seguro e anônimo. Suas respostas não são salvas na internet.</p>
+
+        <!-- PAINEL DE EMERGÊNCIA -->
         <div class="emergency-box">
             <h3>🚨 Ajuda Imediata</h3>
             <a href="tel:190" class="btn-call" style="background-color: #d9534f;">Ligar 190 (PM)</a>
@@ -36,7 +64,9 @@
             <button id="sendAlertBtn" class="btn-call" style="background-color: #5cb85c; display: none; margin-top: 10px;" onclick="sendSecretMessage()">💬 SOS Contato de Confiança</button>
         </div>
 
-        <div id="quizBox">
+        <!-- SEÇÃO DO QUIZ -->
+        <div id="quizBox" style="margin-bottom: 30px;">
+            <h3>📊 Questionário de Diagnóstico</h3>
             <div id="questionArea">
                 <p id="questionText" style="font-size: 18px; font-weight: bold;"></p>
                 <button class="btn-ans" onclick="nextQuestion(true)">Sim</button>
@@ -47,20 +77,38 @@
                 <p id="resultText" style="font-size: 16px; line-height: 1.5;"></p>
             </div>
         </div>
+
+        <!-- SEÇÃO DE VÍDEOS DE AUTODEFESA -->
+        <hr>
+        <h3>📹 Guia Prático de Autodefesa</h3>
+        <p>Vídeos educativos sobre prevenção e técnicas de escape para situações de risco:</p>
+        
+        <h4>1. Prevenção e Postura de Segurança</h4>
+        <div class="video-container">
+            <!-- Link do YouTube incorporado (Substitua o ID se quiser outro vídeo) -->
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
+        </div>
+
+        <h4>2. Técnicas Simples de Desvencilhamento</h4>
+        <div class="video-container">
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
+        </div>
     </div>
 
     <script>
+        // Lógica do Disfarce: Mostra a tela secreta e esconde a receita
+        function revealSecretQuiz() {
+            document.getElementById('recipeScreen').classList.add('hidden');
+            document.getElementById('secretScreen').classList.remove('hidden');
+            showQuestion();
+        }
+
         const questions = [
             "1. O seu parceiro controla as roupas que você usa, suas redes sociais ou com quem você conversa?",
             "2. Ele costuma ridicularizar suas opiniões, crenças ou seu corpo na frente de outras pessoas?",
-            "3. Você se sente culpada ou com medo quando ele fica em silêncio ou demonstra insatisfação?",
-            "4. Ele já destruiu ou escondeu objetos seus (celular, documentos, roupas) durante uma discussão?",
-            "5. Ele tenta afastar você dos seus familiares, amigos ou colegas de trabalho?",
-            "6. Ele controla o seu dinheiro, impede você de trabalhar ou exige que preste contas de cada centavo?",
-            "7. Você já mudou o seu comportamento ou deixou de fazer algo por medo da reação dele?",
-            "8. Ele já fez ameaças de se machucar ou de machucar pessoas queridas caso você o deixe?",
-            "9. Você já foi forçada ou pressionada a ter relações íntimas quando não queria?",
-            "10. Ele já usou de força física contra você (empurrões, segurar com força, tapas), mesmo que tenha pedido desculpas depois?"
+            "3. Você se sensação de culpa ou medo quando ele demonstra insatisfação?",
+            "4. Ele já destruiu ou escondeu objetos seus durante uma discussão?",
+            "5. Ele tenta afastar você dos seus familiares ou amigos?"
         ];
 
         let currentQuestion = 0;
@@ -85,14 +133,12 @@
             document.getElementById('resultArea').classList.remove('hidden');
             
             const resultText = document.getElementById('resultText');
-            if (score >= 7) {
-                resultText.innerHTML = "<strong>Alerta Alto:</strong> Suas respostas indicam que você está vivenciando uma situação de violência severa e perigo iminente. Busque proteção imediatamente utilizando os botões de emergência acima. Você não está sozinha.";
-            } else if (score >= 4) {
-                resultText.innerHTML = "<strong>Alerta Moderado:</strong> Existem sinais claros de comportamento abusivo e controle no seu relacionamento. Esse ciclo tende a aumentar com o tempo. Considere conversar com profissionais ou ligar para o 180 para orientações seguras.";
+            if (score >= 3) {
+                resultText.innerHTML = "<strong>Alerta Alto:</strong> Suas respostas indicam comportamentos abusivos severos. Busque proteção utilizando os botões de emergência acima. Você não está sozinha.";
             } else if (score >= 1) {
-                resultText.innerHTML = "<strong>Atenção Inicial:</strong> Alguns comportamentos identificados servem como sinais de alerta (red flags). Fique atenta a comportamentos de controle e ciúme excessivo. Relacionamentos saudáveis são baseados em respeito mútuo.";
+                resultText.innerHTML = "<strong>Atenção Inicial:</strong> Existem sinais de alerta no relacionamento. Fique atenta e estabeleça limites seguros para o seu bem-estar.";
             } else {
-                resultText.innerHTML = "Sua avaliação não indicou sinais de relacionamento abusivo. Continue priorizando o respeito mútuo, sua liberdade e seu bem-estar emocional.";
+                resultText.innerHTML = "Sua avaliação não indicou sinais de relacionamento abusivo. Continue priorizando sua liberdade.";
             }
         }
 
@@ -127,7 +173,6 @@
 
         window.onload = function() {
             checkSavedContact();
-            showQuestion();
         };
     </script>
 </body>
