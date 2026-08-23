@@ -84,21 +84,110 @@
         <h3>📹 Guia Prático de Segurança e Autodefesa</h3>
         <p>Vídeos educativos sobre proteção, técnicas de escape e ferramentas de defesa individual:</p>
         
-        <h4>1. Objetos Legais e Úteis de Defesa Pessoal</h4>
+        <h4>1. Objetos de Defesa Pessoal que Você Pode Carregar</h4>
         <div class="video-container">
-            <iframe src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
         </div>
 
-        <h4>2. Técnicas Essenciais de Escape e Defesa Feminina</h4>
+        <h4>2. Técnicas Simples de Defesa Pessoal Feminina</h4>
         <div class="video-container">
-            <iframe src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
         </div>
 
-        <h4>3. Como se Desvencilhar de Agarrões e Puxões de Braço</h4>
+        <h4>3. Como Escapar de Agarrões e Puxões</h4>
         <div class="video-container">
-            <iframe src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
         </div>
 
-        <h4>4. Postura Preventiva e Segurança Urbana</h4>
+        <h4>4. Postura Preventiva e Segurança na Rua</h4>
         <div class="video-container">
-            <iframe src="https://youtube.com
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
+        </div>
+
+        <h4>5. Estratégias de Defesa e Fuga em Riscos Imediatos</h4>
+        <div class="video-container">
+            <iframe src="https://youtube.com" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        function revealSecretQuiz() {
+            document.getElementById('recipeScreen').classList.add('hidden');
+            document.getElementById('secretScreen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        const questions = [
+            "1. O seu parceiro controla as roupas que você usa, suas redes sociais ou com quem você conversa?",
+            "2. Ele costuma ridicularizar suas opiniões, crenças ou seu corpo na frente de outras pessoas?",
+            "3. Você se sente culpada ou com medo quando ele demonstra insatisfação?",
+            "4. Ele já destruiu ou escondeu objetos seus durante uma discussão?",
+            "5. Ele tenta afastar você dos seus familiares ou amigos?"
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById('questionText').innerText = questions[currentQuestion];
+            } else {
+                showResult();
+            }
+        }
+
+        function nextQuestion(isYes) {
+            if(isYes) score++;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('questionArea').classList.add('hidden');
+            document.getElementById('resultArea').classList.remove('hidden');
+            
+            const resultText = document.getElementById('resultText');
+            if (score >= 3) {
+                resultText.innerHTML = "<strong>Alerta Alto:</strong> Suas respostas indicam comportamentos abusivos severos. Busque proteção utilizando os botões de emergência acima. Você não está sozinha.";
+            } else if (score >= 1) {
+                resultText.innerHTML = "<strong>Atenção Inicial:</strong> Existem sinais de alerta no relacionamento. Fique atenta e estabeleça limites seguros para o seu bem-estar.";
+            } else {
+                resultText.innerHTML = "Sua avaliação não indicou sinais de relacionamento abusivo. Continue priorizando sua liberdade.";
+            }
+        }
+
+        function panicExit() {
+            window.location.replace("https://google.com.br");
+        }
+
+        function saveContact() {
+            const phone = document.getElementById('trustPhone').value.trim();
+            if(phone) {
+                localStorage.setItem('safe_contact', phone);
+                alert('Contato configurado com sucesso no seu aparelho.');
+                checkSavedContact();
+            }
+        }
+
+        function checkSavedContact() {
+            const saved = localStorage.getItem('safe_contact');
+            if(saved) {
+                document.getElementById('sendAlertBtn').style.display = 'inline-block';
+                document.getElementById('trustPhone').value = saved;
+            }
+        }
+
+        function sendSecretMessage() {
+            const phone = localStorage.getItem('safe_contact');
+            const text = encodeURIComponent("Preciso de ajuda urgente. Não posso falar agora. Venha me buscar ou ligue para as autoridades.");
+            if(phone) {
+                window.open(`https://whatsapp.com{phone}&text=${text}`, '_blank');
+            }
+        }
+
+        window.onload = function() {
+            checkSavedContact();
+        };
+    </script>
+</body>
+</html>
