@@ -16,8 +16,9 @@
         
         /* Estilos do Disfarce */
         .recipe-header { cursor: pointer; color: #d9534f; text-decoration: underline; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 15px; border-radius: 4px; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 25px; border-radius: 4px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        h4 { margin-top: 20px; margin-bottom: 8px; color: #555; }
     </style>
 </head>
 <body>
@@ -45,7 +46,7 @@
         <p>3. Adicione o fermento por último e asse por 40 minutos em forno médio.</p>
     </div>
 
-    <!-- TELA 2: O PORTAL SECRETO (Escondido por padrão) -->
+    <!-- TELA 2: O PORTAL SECRETO -->
     <div class="container hidden" id="secretScreen">
         <h2>Autoavaliação e Autodefesa</h2>
         <p>Espaço seguro e anônimo. Suas respostas não são salvas na internet.</p>
@@ -80,23 +81,37 @@
 
         <!-- SEÇÃO DE VÍDEOS DE AUTODEFESA -->
         <hr>
-        <h3>📹 Guia Prático de Autodefesa</h3>
-        <p>Vídeos educativos sobre prevenção e técnicas de escape para situações de risco:</p>
+        <h3>📹 Guia Prático de Segurança e Autodefesa</h3>
+        <p>Vídeos educativos sobre proteção, técnicas de escape e ferramentas de defesa individual:</p>
         
-        <h4>1. Prevenção e Postura de Segurança</h4>
+        <h4>1. Objetos Úteis de Defesa Pessoal para Mulheres</h4>
         <div class="video-container">
-            <!-- Link do YouTube incorporado (Substitua o ID se quiser outro vídeo) -->
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
+            <!-- Vídeo sobre itens que a mulher pode carregar para se defender -->
+            <iframe src="https://youtube-nocookie.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <h4>2. Técnicas Simples de Desvencilhamento</h4>
+        <h4>2. Prevenção e Postura Alerta na Rua</h4>
         <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
+            <iframe src="https://youtube-nocookie.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h4>3. Como se Desvencilhar de Agarrões Comuns</h4>
+        <div class="video-container">
+            <iframe src="https://youtube-nocookie.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h4>4. Técnicas de Defesa para Situações Críticas</h4>
+        <div class="video-container">
+            <iframe src="https://youtube-nocookie.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h4>5. Como Agir Sob Pressão e Buscar Fuga</h4>
+        <div class="video-container">
+            <iframe src="https://youtube-nocookie.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        // Lógica do Disfarce: Mostra a tela secreta e esconde a receita
         function revealSecretQuiz() {
             document.getElementById('recipeScreen').classList.add('hidden');
             document.getElementById('secretScreen').classList.remove('hidden');
@@ -106,7 +121,7 @@
         const questions = [
             "1. O seu parceiro controla as roupas que você usa, suas redes sociais ou com quem você conversa?",
             "2. Ele costuma ridicularizar suas opiniões, crenças ou seu corpo na frente de outras pessoas?",
-            "3. Você se sensação de culpa ou medo quando ele demonstra insatisfação?",
+            "3. Você se sente culpada ou com medo quando ele demonstra insatisfação?",
             "4. Ele já destruiu ou escondeu objetos seus durante uma discussão?",
             "5. Ele tenta afastar você dos seus familiares ou amigos?"
         ];
@@ -176,4 +191,3 @@
         };
     </script>
 </body>
-</html>
