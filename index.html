@@ -3,192 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Informações Gerais</title>
+    <title>Receitas Práticas - O Melhor Bolo de Cenoura</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333; margin: 0; }
-        .panic-btn { position: fixed; top: 10px; right: 10px; background-color: #d9534f; color: white; border: none; padding: 12px 20px; font-weight: bold; border-radius: 5px; cursor: pointer; z-index: 1000; }
-        .emergency-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-        .btn-call { display: inline-block; background: #0275d8; color: white; padding: 10px 15px; margin: 5px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); max-width: 600px; margin: 20px auto; }
-        .btn-ans { background: #f0f0f0; border: 1px solid #ccc; padding: 10px 20px; margin: 10px 5px; cursor: pointer; border-radius: 4px; font-size: 16px; }
-        .btn-ans:hover { background: #e0e0e0; }
-        .hidden { display: none; }
-        
-        /* Estilos do Disfarce */
-        .recipe-header { cursor: pointer; color: #d9534f; text-decoration: underline; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 25px; border-radius: 4px; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        h4 { margin-top: 20px; margin-bottom: 8px; color: #555; }
+        /* Estilos Gerais e Temáticos da Receita */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fcf8f2;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h1 { color: #d35400; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #7f8c8d; font-style: italic; margin-bottom: 30px; }
+        .recipe-meta { display: flex; justify-content: space-around; background: #fdf2e9; padding: 10px; border-radius: 5px; margin-bottom: 25px; font-size: 14px; }
+        h2 { color: #e67e22; border-bottom: 2px solid #f39c12; padding-bottom: 5px; }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* Botão Disfarçado na Receita */
+        .btn-disfarçado {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 16px;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: none;
+            border-bottom: 1px dashed #e67e22;
+        }
+
+        /* Painel de Acolhimento (Escondido por padrão) */
+        #painel-acolhimento {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .acolhimento-conteudo {
+            max-width: 600px;
+            margin: 40px auto;
+            font-family: sans-serif;
+        }
+
+        /* Botão de Saída Rápida Fixo */
+        .btn-saida-rapida {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10000;
+        }
+        .btn-saida-rapida:hover { background-color: #ae2717; }
+
+        /* Grade de Botões de Emergência */
+        .grid-emergencia {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        @media(min-width: 480px) {
+            .grid-emergencia { grid-template-columns: 1fr 1fr; }
+        }
+        .btn-emergencia {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-180 { background-color: #2980b9; }
+        .btn-190 { background-color: #27ae60; }
+        .btn-pessoal { background-color: #8e44ad; grid-column: 1 / -1; }
+        .btn-emergencia span { font-size: 12px; font-weight: normal; margin-top: 5px; opacity: 0.9; }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO DE PÂNICO GLOBAL -->
-    <button class="panic-btn" onclick="panicExit()">SAIR AGORA</button>
+    <!-- BOTÃO DE SAÍDA RÁPIDA (Disponível em qualquer tela) -->
+    <button class="btn-saida-rapida" onclick="saidaRapida()" title="Clique ou aperte ESC para sair instantaneamente">SAIR RÁPIDO (ESC)</button>
 
-    <!-- TELA 1: O DISFARCE (Receita de Bolo Falsa) -->
-    <div class="container" id="recipeScreen">
-        <h1 class="recipe-header" onclick="revealSecretQuiz()">Bolo de Cenoura Fofinho com Chocolate</h1>
-        <p><em>Dica: Clique no título acima para ver informações adicionais de nutrição.</em></p>
-        <hr>
-        <h3>Ingredientes:</h3>
+    <!-- TELA 1: SITE DISFARÇADO (RECEITA DE BOLO) -->
+    <div class="container">
+        <h1>Bolo de Cenoura de Liquidificador</h1>
+        <div class="subtitle">A receita mais fofinha e prática para o seu café da tarde</div>
+
+        <div class="recipe-meta">
+            <span><strong>Preparo:</strong> 40 min</span>
+            <span><strong>Rendimento:</strong> 12 porções</span>
+            <span><strong>Dificuldade:</strong> Fácil</span>
+        </div>
+
+        <h2>Ingredientes</h2>
+        <h3>Massa:</h3>
         <ul>
-            <li>3 cenouras médias raladas</li>
-            <li>4 ovos inteiros</li>
+            <li>3 cenouras médias raspadas e picadas</li>
+            <li>3 ovos inteiros</li>
             <li>1 xícara de óleo de soja</li>
             <li>2 xícaras de açúcar</li>
             <li>2 xícaras de farinha de trigo</li>
-            <li>1 colher de sopa de fermento em pó</li>
+            <li>1 colher (sopa) de fermento químico em pó</li>
         </ul>
-        <h3>Modo de Preparo:</h3>
-        <p>1. Bata no liquidificador as cenouras, os ovos e o óleo até obter uma massa homogênea.</p>
-        <p>2. Despeje em uma tigela com o açúcar e a farinha, misturando bem.</p>
-        <p>3. Adicione o fermento por último e asse por 40 minutos em forno médio.</p>
+
+        <h3>Cobertura:</h3>
+        <ul>
+            <li>1 colher (sopa) de manteiga</li>
+            <li>3 colheres (sopa) de chocolate em pó</li>
+            <li>1 xícara de açúcar</li>
+            <li>1/3 xícara de leite</li>
+        </ul>
+
+        <h2>Modo de Preparo</h2>
+        <ol>
+            <li>No liquidificador, bata as cenouras picadas, os ovos e o óleo até obter uma mistura completamente homogênea.</li>
+            <li>Despeje essa mistura em uma tigela funda e adicione o açúcar, mexendo bem com uma colher ou batedor manual.</li>
+            <li><button class="btn-disfarçado" onclick="abrirAcolhimento()">Acrescente a farinha de trigo aos poucos</button>, peneirando para evitar grumos, e misture delicadamente até incorporar.</li>
+            <li>Por último, adicione o fermento em pó e misture suavemente com movimentos de baixo para cima.</li>
+            <li>Despeje a massa em uma forma untada e enfarinhada. Leve ao forno preaquecido a 180°C por cerca de 40 minutos.</li>
+        </ol>
     </div>
 
-    <!-- TELA 2: O PORTAL SECRETO -->
-    <div class="container hidden" id="secretScreen">
-        <h2>Autoavaliação e Autodefesa</h2>
-        <p>Espaço seguro e anônimo. Suas respostas não são salvas na internet.</p>
-
-        <!-- PAINEL DE EMERGÊNCIA -->
-        <div class="emergency-box">
-            <h3>🚨 Ajuda Imediata</h3>
-            <a href="tel:190" class="btn-call" style="background-color: #d9534f;">Ligar 190 (PM)</a>
-            <a href="tel:180" class="btn-call" style="background-color: #f0ad4e;">Ligar 180 (Mulher)</a>
+    <!-- TELA 2: ÁREA DE ACOLHIMENTO SECRETA -->
+    <div id="painel-acolhimento">
+        <div class="acolhimento-conteudo">
+            <h2>Espaço de Apoio e Orientação</h2>
+            <p>Você está em um ambiente seguro. Se você ou alguém que você conhece está passando por uma situação de violência ou abuso, saiba que você não está sozinha e existem canais oficiais prontos para ajudar.</p>
             
-            <div style="margin-top: 15px;">
-                <label>Configurar Contato de Confiança (Salvo apenas no seu celular):</label><br>
-                <input type="tel" id="trustPhone" placeholder="Ex: 5573999999999" style="padding: 6px; width: 220px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
-                <button onclick="saveContact()" style="padding: 6px 12px; cursor: pointer;">Salvar</button>
+            <div class="grid-emergencia">
+                <!-- Botão Ligar 180 -->
+                <a href="tel:180" class="btn-emergencia btn-180">
+                    Ligar 180
+                    <span>Central de Atendimento à Mulher</span>
+                </a>
+
+                <!-- Botão Ligar 190 -->
+                <a href="tel:190" class="btn-emergencia btn-190">
+                    Ligar 190
+                    <span>Polícia Militar (Emergência)</span>
+                </a>
+
+                <!-- Botão Contato de Emergência Escolhido (Substitua o número abaixo) -->
+                <a href="https://wa.me" target="_blank" class="btn-emergencia btn-pessoal">
+                    Enviar Mensagem de Emergência
+                    <span>Contato de Confiança (WhatsApp)</span>
+                </a>
             </div>
-            <button id="sendAlertBtn" class="btn-call" style="background-color: #5cb85c; display: none; margin-top: 10px;" onclick="sendSecretMessage()">💬 SOS Contato de Confiança</button>
-        </div>
-
-        <!-- SEÇÃO DO QUIZ -->
-        <div id="quizBox" style="margin-bottom: 30px;">
-            <h3>📊 Questionário de Diagnóstico</h3>
-            <div id="questionArea">
-                <p id="questionText" style="font-size: 18px; font-weight: bold;"></p>
-                <button class="btn-ans" onclick="nextQuestion(true)">Sim</button>
-                <button class="btn-ans" onclick="nextQuestion(false)">Não</button>
-            </div>
-            <div id="resultArea" class="hidden">
-                <h3>Resultado da Avaliação</h3>
-                <p id="resultText" style="font-size: 16px; line-height: 1.5;"></p>
-            </div>
-        </div>
-
-        <!-- SEÇÃO DE VÍDEOS DE AUTODEFESA -->
-        <hr>
-        <h3>📹 Guia Prático de Segurança e Autodefesa</h3>
-        <p>Vídeos educativos sobre proteção, técnicas de escape e ferramentas de defesa individual:</p>
-        
-        <h4>1. Objetos de Defesa Pessoal que Você Pode Carregar</h4>
-        <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
-        </div>
-
-        <h4>2. Técnicas Simples de Defesa Pessoal Feminina</h4>
-        <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
-        </div>
-
-        <h4>3. Como Escapar de Agarrões e Puxões</h4>
-        <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
-        </div>
-
-        <h4>4. Postura Preventiva e Segurança na Rua</h4>
-        <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
-        </div>
-
-        <h4>5. Estratégias de Defesa e Fuga em Riscos Imediatos</h4>
-        <div class="video-container">
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        function revealSecretQuiz() {
-            document.getElementById('recipeScreen').classList.add('hidden');
-            document.getElementById('secretScreen').classList.remove('hidden');
-            showQuestion();
+        // Função para exibir a tela de acolhimento interna
+        function abrirAcolhimento() {
+            document.getElementById('painel-acolhimento').style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
-        const questions = [
-            "1. O seu parceiro controla as roupas que você usa, suas redes sociais ou com quem você conversa?",
-            "2. Ele costuma ridicularizar suas opiniões, crenças ou seu corpo na frente de outras pessoas?",
-            "3. Você se sente culpada ou com medo quando ele demonstra insatisfação?",
-            "4. Ele já destruiu ou escondeu objetos seus durante uma discussão?",
-            "5. Ele tenta afastar você dos seus familiares ou amigos?"
-        ];
-
-        let currentQuestion = 0;
-        let score = 0;
-
-        function showQuestion() {
-            if (currentQuestion < questions.length) {
-                document.getElementById('questionText').innerText = questions[currentQuestion];
-            } else {
-                showResult();
-            }
-        }
-
-        function nextQuestion(isYes) {
-            if(isYes) score++;
-            currentQuestion++;
-            showQuestion();
-        }
-
-        function showResult() {
-            document.getElementById('questionArea').classList.add('hidden');
-            document.getElementById('resultArea').classList.remove('hidden');
-            
-            const resultText = document.getElementById('resultText');
-            if (score >= 3) {
-                resultText.innerHTML = "<strong>Alerta Alto:</strong> Suas respostas indicam comportamentos abusivos severos. Busque proteção utilizando os botões de emergência acima. Você não está sozinha.";
-            } else if (score >= 1) {
-                resultText.innerHTML = "<strong>Atenção Inicial:</strong> Existem sinais de alerta no relacionamento. Fique atenta e estabeleça limites seguros para o seu bem-estar.";
-            } else {
-                resultText.innerHTML = "Sua avaliação não indicou sinais de relacionamento abusivo. Continue priorizando sua liberdade.";
-            }
-        }
-
-        function panicExit() {
+        // Função de Saída Rápida Definitiva
+        function saidaRapida() {
+            // Substitui o histórico do navegador para impedir que o botão "Voltar" retorne a este site
             window.location.replace("https://google.com.br");
         }
 
-        function saveContact() {
-            const phone = document.getElementById('trustPhone').value.trim();
-            if(phone) {
-                localStorage.setItem('safe_contact', phone);
-                alert('Contato configurado com sucesso no seu aparelho.');
-                checkSavedContact();
+        // Atalho por teclado: Aciona a saída rápida ao pressionar a tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                saidaRapida();
             }
-        }
-
-        function checkSavedContact() {
-            const saved = localStorage.getItem('safe_contact');
-            if(saved) {
-                document.getElementById('sendAlertBtn').style.display = 'inline-block';
-                document.getElementById('trustPhone').value = saved;
-            }
-        }
-
-        function sendSecretMessage() {
-            const phone = localStorage.getItem('safe_contact');
-            const text = encodeURIComponent("Preciso de ajuda urgente. Não posso falar agora. Venha me buscar ou ligue para as autoridades.");
-            if(phone) {
-                window.open(`https://whatsapp.com{phone}&text=${text}`, '_blank');
-            }
-        }
-
-        window.onload = function() {
-            checkSavedContact();
-        };
+        });
     </script>
 </body>
 </html>
-
