@@ -25,22 +25,27 @@
         h1 { color: #d35400; text-align: center; margin-bottom: 5px; }
         .subtitle { text-align: center; color: #7f8c8d; font-style: italic; margin-bottom: 30px; }
         .recipe-meta { display: flex; justify-content: space-around; background: #fdf2e9; padding: 10px; border-radius: 5px; margin-bottom: 25px; font-size: 14px; }
-        h2 { color: #e67e22; border-bottom: 2px solid #f39c12; padding-bottom: 5px; }
+        h2 { color: #e67e22; border-bottom: 2px solid #f39c12; padding-bottom: 5px; margin-top: 30px; }
         ul, ol { padding-left: 20px; }
         li { margin-bottom: 8px; }
 
-        /* Botão Disfarçado na Receita */
-        .btn-disfarçado {
-            background: none;
+        /* Botão de Entrada Discreto */
+        .btn-entrar-acolhimento {
+            display: block;
+            width: 100%;
+            background-color: #e67e22;
+            color: white;
             border: none;
-            color: #333;
+            padding: 14px;
             font-size: 16px;
-            font-family: inherit;
+            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
-            padding: 0;
-            text-decoration: none;
-            border-bottom: 1px dashed #e67e22;
+            margin-bottom: 25px;
+            text-align: center;
+            transition: background 0.2s;
         }
+        .btn-entrar-acolhimento:hover { background-color: #d35400; }
 
         /* Painel de Acolhimento (Escondido por padrão) */
         #painel-acolhimento {
@@ -50,7 +55,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #ffffff;
+            background: #fdfbf7;
             z-index: 9999;
             overflow-y: auto;
             padding: 20px;
@@ -58,8 +63,46 @@
         }
         .acolhimento-conteudo {
             max-width: 600px;
-            margin: 40px auto;
-            font-family: sans-serif;
+            margin: 60px auto 40px auto;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Logo de Coração Roxo (CSS puro) */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .coracao-roxo {
+            position: relative;
+            width: 50px;
+            height: 45px;
+            background-color: #8e44ad;
+            display: inline-block;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            transform: rotate(-45deg);
+            animation: pulsar 2s infinite;
+        }
+        .coracao-roxo:before, .coracao-roxo:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #8e44ad;
+            border-radius: 50%;
+        }
+        .coracao-roxo:before { top: -25px; left: 0; }
+        .coracao-roxo:after { top: 0; left: 25px; }
+        
+        @keyframes pulsar {
+            0% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(1.06) rotate(-45deg); }
+            100% { transform: scale(1) rotate(-45deg); }
         }
 
         /* Botão de Saída Rápida Fixo */
@@ -85,40 +128,66 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 25px;
         }
-        @media(min-width: 480px) {
-            .grid-emergencia { grid-template-columns: 1fr 1fr; }
-        }
+        @media(min-width: 480px) { .grid-emergencia { grid-template-columns: 1fr 1fr; } }
         .btn-emergencia {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            padding: 20px;
+            padding: 18px;
             color: white;
             text-decoration: none;
             font-weight: bold;
             font-size: 18px;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: opacity 0.2s;
         }
+        .btn-emergencia:hover { opacity: 0.9; }
         .btn-180 { background-color: #2980b9; }
         .btn-190 { background-color: #27ae60; }
         .btn-pessoal { background-color: #8e44ad; grid-column: 1 / -1; }
         .btn-emergencia span { font-size: 12px; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+
+        /* Seções de Configuração e Quiz */
+        .secao-box {
+            background: #fdfaff;
+            border: 1px solid #ebdbf5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .secao-box h3 { color: #6c3483; margin-top: 0; }
+        
+        /* Formulários */
+        .form-grupo { margin-bottom: 15px; }
+        .form-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        .form-grupo input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn-salvar { background: #6c3483; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        /* Quiz */
+        .quiz-pergunta { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ebd6f7; }
+        .quiz-opcoes label { display: block; background: #fff; border: 1px solid #ddd; padding: 10px; margin-top: 8px; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
+        .quiz-opcoes label:hover { background: #f5f0f9; }
+        .quiz-opcoes input { margin-right: 10px; }
+        #resultado-quiz { font-weight: bold; margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO DE SAÍDA RÁPIDA (Disponível em qualquer tela) -->
-    <button class="btn-saida-rapida" onclick="saidaRapida()" title="Clique ou aperte ESC para sair instantaneamente">SAIR RÁPIDO (ESC)</button>
+    <!-- BOTÃO DE SAÍDA RÁPIDA -->
+    <button class="btn-saida-rapida" onclick="saidaRapida()">SAIR RÁPIDO (ESC)</button>
 
     <!-- TELA 1: SITE DISFARÇADO (RECEITA DE BOLO) -->
     <div class="container">
         <h1>Bolo de Cenoura de Liquidificador</h1>
         <div class="subtitle">A receita mais fofinha e prática para o seu café da tarde</div>
+
+        <!-- Botão de Entrada Tradicional -->
+        <button class="btn-entrar-acolhimento" onclick="abrirAcolhimento()">Clique aqui para acessar as Dicas Extras</button>
 
         <div class="recipe-meta">
             <span><strong>Preparo:</strong> 40 min</span>
@@ -137,71 +206,46 @@
             <li>1 colher (sopa) de fermento químico em pó</li>
         </ul>
 
-        <h3>Cobertura:</h3>
-        <ul>
-            <li>1 colher (sopa) de manteiga</li>
-            <li>3 colheres (sopa) de chocolate em pó</li>
-            <li>1 xícara de açúcar</li>
-            <li>1/3 xícara de leite</li>
-        </ul>
-
         <h2>Modo de Preparo</h2>
         <ol>
             <li>No liquidificador, bata as cenouras picadas, os ovos e o óleo até obter uma mistura completamente homogênea.</li>
             <li>Despeje essa mistura em uma tigela funda e adicione o açúcar, mexendo bem com uma colher ou batedor manual.</li>
-            <li><button class="btn-disfarçado" onclick="abrirAcolhimento()">Acrescente a farinha de trigo aos poucos</button>, peneirando para evitar grumos, e misture delicadamente até incorporar.</li>
+            <li>Acrescente a farinha de trigo aos poucos, peneirando para evitar grumos, e misture delicadamente até incorporar.</li>
             <li>Por último, adicione o fermento em pó e misture suavemente com movimentos de baixo para cima.</li>
-            <li>Despeje a massa em uma forma untada e enfarinhada. Leve ao forno preaquecido a 180°C por cerca de 40 minutos.</li>
         </ol>
     </div>
 
-    <!-- TELA 2: ÁREA DE ACOLHIMENTO SECRETA -->
+    <!-- TELA 2: ÁREA DE ACOLHIMENTO -->
     <div id="painel-acolhimento">
         <div class="acolhimento-conteudo">
-            <h2>Espaço de Apoio e Orientação</h2>
-            <p>Você está em um ambiente seguro. Se você ou alguém que você conhece está passando por uma situação de violência ou abuso, saiba que você não está sozinha e existem canais oficiais prontos para ajudar.</p>
             
+            <!-- LOGO CORAÇÃO ROXO -->
+            <div class="logo-container">
+                <div class="coracao-roxo"></div>
+            </div>
+
+            <h2 style="text-align: center; color: #6c3483; border: none;">Espaço Unitário de Apoio</h2>
+            <p style="text-align: center; color: #555;">Você está em um ambiente seguro e sigiloso. Veja recursos de proteção abaixo:</p>
+            
+            <!-- CANAIS DE SOCORRO -->
             <div class="grid-emergencia">
-                <!-- Botão Ligar 180 -->
                 <a href="tel:180" class="btn-emergencia btn-180">
                     Ligar 180
                     <span>Central de Atendimento à Mulher</span>
                 </a>
 
-                <!-- Botão Ligar 190 -->
                 <a href="tel:190" class="btn-emergencia btn-190">
                     Ligar 190
                     <span>Polícia Militar (Emergência)</span>
                 </a>
 
-                <!-- Botão Contato de Emergência Escolhido (Substitua o número abaixo) -->
-                <a href="https://wa.me" target="_blank" class="btn-emergencia btn-pessoal">
+                <!-- Botão de Mensagem Dinâmica -->
+                <a id="btn-whatsapp-dinamico" href="#" onclick="alert('Por favor, cadastre um contato de emergência no formulário abaixo primeiro.'); return false;" target="_blank" class="btn-emergencia btn-pessoal">
                     Enviar Mensagem de Emergência
-                    <span>Contato de Confiança (WhatsApp)</span>
+                    <span id="txt-status-contato">Nenhum contato cadastrado</span>
                 </a>
             </div>
-        </div>
-    </div>
 
-    <script>
-        // Função para exibir a tela de acolhimento interna
-        function abrirAcolhimento() {
-            document.getElementById('painel-acolhimento').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // Função de Saída Rápida Definitiva
-        function saidaRapida() {
-            // Substitui o histórico do navegador para impedir que o botão "Voltar" retorne a este site
-            window.location.replace("https://google.com.br");
-        }
-
-        // Atalho por teclado: Aciona a saída rápida ao pressionar a tecla ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' || event.keyCode === 27) {
-                saidaRapida();
-            }
-        });
-    </script>
-</body>
-</html>
+            <!-- CADASTRO DE CONTATO DE EMERGÊNCIA -->
+            <div class="secao-box">
+                <h3>1. Cadastrar Contato de Emergência</h3>
