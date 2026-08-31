@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receitas Práticas - O Melhor Bolo de Cenoura</title>
     <style>
-        /* Estilos do Disfarce (Receita) */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -15,20 +14,16 @@
             color: #333;
         }
         .container {
-            max-width: 700px;
+            max-width: 600px;
             margin: 20px auto;
             background: #fff;
-            padding: 30px;
+            padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h1 { color: #d35400; text-align: center; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-style: italic; margin-bottom: 30px; }
-        .recipe-meta { display: flex; justify-content: space-around; background: #fdf2e9; padding: 10px; border-radius: 5px; margin-bottom: 25px; font-size: 14px; }
-        h2 { color: #e67e22; border-bottom: 2px solid #f39c12; padding-bottom: 5px; margin-top: 30px; }
-        ul, ol { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-
+        h1 { color: #d35400; text-align: center; }
+        .subtitle { text-align: center; color: #7f8c8d; font-style: italic; margin-bottom: 20px; }
+        
         /* Botão para mudar de tela */
         .btn-mais-detalhes {
             display: block;
@@ -43,27 +38,20 @@
             cursor: pointer;
             margin-bottom: 25px;
             text-align: center;
-            text-transform: uppercase;
         }
-        .btn-mais-detalhes:hover { background-color: #d35400; }
 
-        /* ==========================================
-           TELA PRINCIPAL (ROSA E LILÁS) - SECRETA
-           ========================================== */
+        /* TELA PRINCIPAL (ROSA E LILÁS) */
         #tela-principal {
-            display: none; /* Escondida inicialmente */
+            display: none; /* Começa escondida */
             max-width: 600px;
             margin: 60px auto 40px auto;
-            background: #fff0f5; /* Fundo Rosa Suave */
-            padding: 30px;
+            background: #fff0f5; 
+            padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            border: 3px solid #f3d1df;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid #f3d1df;
         }
-        #tela-principal h1 { color: #c2185b; } /* Título Rosa Escuro */
-        #tela-principal h3 { color: #7b1fa2; margin-top: 0; } /* Subtítulos Lilás */
-
-        /* Botão de Saída Rápida Fixo */
+        
         .btn-saida-rapida {
             position: fixed;
             top: 15px;
@@ -71,177 +59,160 @@
             background-color: #d32f2f;
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             font-weight: bold;
-            font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 99999;
+            z-index: 9999;
         }
 
-        /* Grade de Botões de Emergência */
         .grid-botoes {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 25px 0;
-        }
-        @media(min-width: 480px) { .grid-botoes { grid-template-columns: 1fr 1fr; } }
-
-        .btn-call {
             display: flex;
-            align-items: center;
-            justify-content: center;
             flex-direction: column;
-            padding: 18px;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .btn-call {
+            display: block;
+            padding: 15px;
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 20px;
-            border-radius: 8px;
+            font-size: 18px;
+            border-radius: 6px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .cor-180 { background-color: #8e24aa; } /* Lilás Forte */
-        .cor-190 { background-color: #e91e63; } /* Rosa Forte */
+        .cor-180 { background-color: #8e24aa; } 
+        .cor-190 { background-color: #e91e63; } 
         
         .btn-sms-emergencia {
-            grid-column: 1 / -1;
-            background-color: #4a148c; /* Roxo Escuro */
+            background-color: #4a148c; 
             color: white;
             border: none;
-            padding: 18px;
+            padding: 15px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
         }
-        .btn-sms-emergencia span { display: block; font-size: 12px; font-weight: normal; margin-top: 4px; opacity: 0.8; }
 
-        /* Blocos de Conteúdo Interno */
         .bloco-conteudo {
-            background: #fbe4ee; /* Mistura de rosa/lilás claro */
+            background: #fbe4ee; 
             border: 1px solid #e1bee7;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
-        /* Formulário */
-        .campo-grupo { margin-bottom: 15px; }
-        .campo-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #4a4a4a; }
-        .campo-grupo input { width: 100%; padding: 12px; border: 1px solid #ce93d8; border-radius: 5px; box-sizing: border-box; }
-        .btn-acao-salvar { background: #7b1fa2; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+        .campo-grupo { margin-bottom: 12px; }
+        .campo-grupo label { display: block; font-weight: bold; margin-bottom: 5px; }
+        .campo-grupo input { width: 100%; padding: 10px; border: 1px solid #ce93d8; border-radius: 5px; box-sizing: border-box; }
+        .btn-acao-salvar { background: #7b1fa2; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
 
-        /* Estilo do Quiz */
-        .quiz-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #ce93d8; }
-        .quiz-item p { margin-bottom: 10px; font-weight: 600; }
-        .opcao-label { display: block; background: #fff; border: 1px solid #e1bee7; padding: 12px; margin-top: 8px; border-radius: 6px; cursor: pointer; }
-        .opcao-label:hover { background: #f3e5f5; }
-        .opcao-label input { margin-right: 10px; }
-        
-        /* Box de Explicação */
-        .box-explicacao {
-            margin-top: 12px;
-            padding: 12px;
-            background-color: #fff;
-            border-left: 4px solid #8e24aa;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #333;
-            display: none; /* Revelado por clique */
-        }
+        .opcao-label { display: block; background: #fff; border: 1px solid #e1bee7; padding: 10px; margin-top: 6px; border-radius: 5px; cursor: pointer; }
+        .box-explicacao { margin-top: 10px; padding: 10px; background-color: #fff; border-left: 4px solid #8e24aa; display: none; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <!-- BOTÃO FIXO DE SAÍDA IMEDIATA -->
-    <button class="btn-saida-rapida" onclick="fecharSeguro()">SAÍDA RÁPIDA (ESC)</button>
+    <button class="btn-saida-rapida" onclick="fecharSeguro()">SAIR (ESC)</button>
 
     <!-- TELA 1: SITE DISFARÇADO (RECEITAS) -->
     <div id="tela-receita" class="container">
         <h1>Bolo de Cenoura de Liquidificador</h1>
-        <div class="subtitle">A receita mais fofinha e prática para o seu café da tarde</div>
+        <div class="subtitle">A receita mais fofinha e prática</div>
 
-        <!-- Botão solicitado que faz a troca de tela -->
+        <!-- BOTÃO DE TROCA -->
         <button class="btn-mais-detalhes" onclick="mostrarPainelOculto()">Mais Detalhes</button>
 
-        <div class="recipe-meta">
-            <span><strong>Preparo:</strong> 40 min</span>
-            <span><strong>Rendimento:</strong> 12 porções</span>
-            <span><strong>Dificuldade:</strong> Fácil</span>
-        </div>
-
-        <h2>Ingredientes</h2>
-        <h3>Massa do Bolo:</h3>
+        <h3>Ingredientes da Massa:</h3>
         <ul>
-            <li>3 cenouras médias raspadas e picadas</li>
+            <li>3 cenouras médias picadas</li>
             <li>3 ovos inteiros</li>
             <li>1 xícara de óleo de soja</li>
             <li>2 xícaras de açúcar</li>
             <li>2 xícaras de farinha de trigo</li>
-            <li>1 colher (sopa) de fermento químico em pó</li>
         </ul>
-
-        <h2>Modo de Preparo</h2>
-        <ol>
-            <li>No liquidificador, adicione as cenouras, os ovos e o óleo. Bata até a mistura ficar completamente lisa.</li>
-            <li>Despeje em uma tigela grande e adicione o açúcar misturando bem.</li>
-            <li>Peneire a farinha de trigo aos poucos, mexendo delicadamente de baixo para cima.</li>
-        </ol>
     </div>
 
-
-    <!-- TELA 2: TELA PRINCIPAL DE APOIO (ROSA E LILÁS) -->
+    <!-- TELA 2: TELA PRINCIPAL (ROSA E LILÁS) -->
     <div id="tela-principal">
-        <h1 style="text-align:center;">Painel de Orientação e Apoio</h1>
-        <p style="text-align:center; color:#555;">Espaço seguro para informações, ferramentas de apoio e conexões de emergência.</p>
-
-        <!-- Grade com Ligações e Alerta WhatsApp -->
+        <h2 style="text-align:center; color:#c2185b;">Painel de Apoio</h2>
+        
         <div class="grid-botoes">
-            <!-- Chamadas nativas diretas para redes de emergência -->
-            <a href="tel:180" class="btn-call cor-180">
-                LIGAR 180
-                <span style="font-size:12px; font-weight:normal; opacity:0.9;">Central de Atendimento</span>
-            </a>
-            
-            <a href="tel:190" class="btn-call cor-190">
-                LIGAR 190
-                <span style="font-size:12px; font-weight:normal; opacity:0.9;">Polícia Militar</span>
-            </a>
-
-            <!-- Botão do Contato Pessoal -->
-            <button class="btn-sms-emergencia" onclick="dispararAjudaWhatsApp()">
-                🚨 ENVIAR MENSAGEM DE SOCORRO
-                <span id="label-contato-atual">Mandar "preciso de ajuda" para o contato configurado</span>
-            </button>
+            <a href="tel:180" class="btn-call cor-180">LIGAR 180 (Mulher)</a>
+            <a href="tel:190" class="btn-call cor-190">LIGAR 190 (Polícia)</a>
+            <button class="btn-sms-emergencia" onclick="dispararAjudaWhatsApp()">🚨 ENVIAR MENSAGEM DE SOCORRO</button>
         </div>
 
-        <!-- Área de Configuração do Contato Salvo -->
         <div class="bloco-conteudo">
-            <h3>Configurar Contato de Emergência</h3>
+            <h3>Contato de Emergência</h3>
             <div class="campo-grupo">
-                <label>Nome do contato confiável:</label>
-                <input type="text" id="input-nome" placeholder="Ex: Ana Amiga">
-            </div>
-            <div class="campo-grupo">
-                <label>WhatsApp (DDD + Número, apenas números):</label>
+                <label>WhatsApp (Apenas números com DDD):</label>
                 <input type="tel" id="input-telefone" placeholder="Ex: 11999999999">
             </div>
-            <button class="btn-acao-salvar" onclick="gravarContatoLocal()">Salvar Configurações</button>
+            <button class="btn-acao-salvar" onclick="gravarContatoLocal()">Salvar Telefone</button>
         </div>
 
-        <!-- Seção do Quiz com Explicações Técnicas (Sem vídeos) -->
         <div class="bloco-conteudo">
-            <h3>Quiz de Informação e Resguardo</h3>
-            
-            <!-- Pergunta 1 -->
-            <div class="quiz-item">
-                <p>1. Monitorar conversas no celular, proibir visitas a familiares ou controlar o dinheiro do parceiro é considerado uma relação normal?</p>
-                <label class="opcao-label">
-                    <input type="radio" name="pergunta1" onclick="exibirResposta('res1')"> 
-                    Sim, é apenas excesso de zelo e proteção de quem ama.
-                </label>
-                <label class="opcao-label">
+            <h3>Quiz Informativo</h3>
+            <p>1. Controlar os passos ou dinheiro da parceira é normal?</p>
+            <label class="opcao-label"><input type="radio" name="p1" onclick="exibirResposta('res1')"> Sim, é normal.</label>
+            <label class="opcao-label"><input type="radio" name="p1" onclick="exibirResposta('res1')"> Não, é um sinal de abuso.</label>
+            <div id="res1" class="box-explicacao">
+                <strong>Explicação:</strong> O controle excessivo viola a liberdade individual e é considerado violência psicológica ou patrimonial.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar as telas
+        function mostrarPainelOculto() {
+            document.getElementById('tela-receita').style.display = 'none';
+            document.getElementById('tela-principal').style.display = 'block';
+        }
+
+        // Função do Quiz
+        function exibirResposta(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Saída rápida para o Google
+        function fecharSeguro() {
+            window.location.replace("https://google.com.br");
+        }
+
+        // Atalho ESC do teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') fecharSeguro();
+        });
+
+        // Salvar telefone no navegador
+        function gravarContatoLocal() {
+            let num = document.getElementById('input-telefone').value;
+            num = num.replace(/\D/g, ''); // Remove letras e traços
+
+            if (!num) {
+                alert("Digite o número com o DDD!");
+                return;
+            }
+
+            localStorage.setItem('emergenciaFone', num);
+            alert("Número gravado com sucesso!");
+        }
+
+        // Enviar o Socorro no WhatsApp
+        function dispararAjudaWhatsApp() {
+            const fone = localStorage.getItem('emergenciaFone');
+            if (!fone) {
+                alert("Salve um número de telefone no formulário abaixo primeiro!");
+                return;
+            }
+            window.location.href = "https://whatsapp.com" + fone + "&text=preciso%20de%20ajuda";
+        }
+    </script>
+</body>
+</html>
