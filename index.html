@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receitas Práticas - O Melhor Bolo de Cenoura</title>
     <style>
-        /* Estilos Gerais e Temáticos da Receita */
+        /* Estilos Gerais e Temáticos da Receita (Disfarce) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -30,7 +30,7 @@
         li { margin-bottom: 8px; }
 
         /* Botão de Entrada Visível */
-        .btn-entrar-acolhimento {
+        .btn-mais-detalhes {
             display: block;
             width: 100%;
             background-color: #e67e22;
@@ -45,53 +45,30 @@
             text-align: center;
             transition: background 0.2s;
         }
-        .btn-entrar-acolhimento:hover { background-color: #d35400; }
+        .btn-mais-detalhes:hover { background-color: #d35400; }
 
-        /* Painel de Acolhimento (Escondido por padrão) */
+        /* =======================================================
+           TELA PRINCIPAL (PAINEL DE ACOLHIMENTO - ROSA E LILÁS)
+           ======================================================= */
         #painel-acolhimento {
             display: none; /* Ativado via JavaScript */
             max-width: 600px;
             margin: 60px auto 40px auto;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #fff;
+            background: #fff5f8; /* Fundo Rosa bem claro */
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 2px solid #f0d5e2;
         }
 
-        /* Logo de Coração Roxo (CSS puro) */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-            margin-top: 20px;
+        #painel-acolhimento h1 {
+            color: #d81b60; /* Rosa Escuro */
         }
-        .coracao-roxo {
-            position: relative;
-            width: 50px;
-            height: 45px;
-            background-color: #8e44ad;
-            display: inline-block;
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 5px;
-            transform: rotate(-45deg);
-            animation: pulsar 2s infinite;
-        }
-        .coracao-roxo:before, .coracao-roxo:after {
-            content: "";
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #8e44ad;
-            border-radius: 50%;
-        }
-        .coracao-roxo:before { top: -25px; left: 0; }
-        .coracao-roxo:after { top: 0; left: 25px; }
         
-        @keyframes pulsar {
-            0% { transform: scale(1) rotate(-45deg); }
-            50% { transform: scale(1.06) rotate(-45deg); }
-            100% { transform: scale(1) rotate(-45deg); }
+        #painel-acolhimento p {
+            color: #4a4a4a;
+            text-align: center;
         }
 
         /* Botão de Saída Rápida Fixo */
@@ -120,6 +97,7 @@
             margin-top: 25px;
         }
         @media(min-width: 480px) { .grid-emergencia { grid-template-columns: 1fr 1fr; } }
+        
         .btn-emergencia {
             display: flex;
             align-items: center;
@@ -133,41 +111,55 @@
             border-radius: 8px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: opacity 0.2s;
+            transition: transform 0.2s, opacity 0.2s;
         }
-        .btn-emergencia:hover { opacity: 0.9; }
-        .btn-180 { background-color: #2980b9; }
-        .btn-190 { background-color: #27ae60; }
-        .btn-pessoal { background-color: #8e44ad; grid-column: 1 / -1; }
-        .btn-emergencia span { font-size: 12px; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+        .btn-emergencia:hover { opacity: 0.9; transform: scale(1.02); }
+        
+        /* Cores dos botões de ligação ajustadas para o tema */
+        .btn-180 { background-color: #9c27b0; } /* Lilás / Roxo */
+        .btn-190 { background-color: #e91e63; } /* Rosa */
+        .btn-pessoal { background-color: #673ab7; grid-column: 1 / -1; } /* Roxo Profundo */
+        .btn-emergencia span { font-size: 13px; font-weight: normal; margin-top: 5px; opacity: 0.9; }
 
         /* Seções de Configuração e Quiz */
         .secao-box {
-            background: #fdfaff;
-            border: 1px solid #ebdbf5;
+            background: #fff0f6; /* Fundo Rosa suave */
+            border: 1px solid #f3d1df;
             padding: 20px;
             border-radius: 8px;
             margin-top: 30px;
         }
-        .secao-box h3 { color: #6c3483; margin-top: 0; }
+        .secao-box h3 { color: #8e24aa; margin-top: 0; } /* Texto Lilás */
         
         /* Formulários */
         .form-grupo { margin-bottom: 15px; }
-        .form-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
-        .form-grupo input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .btn-salvar { background: #6c3483; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .form-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #4a4a4a; }
+        .form-grupo input { width: 100%; padding: 10px; border: 1px solid #dcb5c9; border-radius: 5px; box-sizing: border-box; background: #fff; }
+        .btn-salvar { background: #d81b60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
+        .btn-salvar:hover { background: #c2185b; }
         
         /* Quiz */
-        .quiz-pergunta { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ebd6f7; }
-        .quiz-opcoes label { display: block; background: #fff; border: 1px solid #ddd; padding: 10px; margin-top: 8px; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
-        .quiz-opcoes label:hover { background: #f5f0f9; }
+        .quiz-pergunta { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #f3d1df; }
+        .quiz-opcoes label { display: block; background: #fff; border: 1px solid #f3d1df; padding: 12px; margin-top: 8px; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
+        .quiz-opcoes label:hover { background: #fbe4ee; }
         .quiz-opcoes input { margin-right: 10px; }
-        #resultado-quiz { font-weight: bold; margin-top: 15px; padding: 15px; border-radius: 5px; display: none; }
+        
+        /* Explicações e Respostas */
+        .explicacao {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #f3e5f5; /* Lilás bem claro */
+            border-left: 4px solid #9c27b0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #3b3b3b;
+            display: none; /* Exibido após responder */
+        }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO DE SAÍDA RÁPIDA -->
+    <!-- BOTÃO DE SAÍDA RÁPIDA (Disponível em qualquer tela) -->
     <button class="btn-saida-rapida" onclick="saidaRapida()">SAIR RÁPIDO (ESC)</button>
 
     <!-- TELA 1: SITE DISFARÇADO (RECEITA DE BOLO) -->
@@ -175,8 +167,8 @@
         <h1>Bolo de Cenoura de Liquidificador</h1>
         <div class="subtitle">A receita mais fofinha e prática para o seu café da tarde</div>
 
-        <!-- Botão de Transição Corrigido -->
-        <button class="btn-entrar-acolhimento" onclick="abrirAcolhimento()">Clique aqui para acessar as Dicas Extras</button>
+        <!-- Botão de Transição Solicitado -->
+        <button class="btn-mais-detalhes" onclick="abrirTelaPrincipal()">Mais Detalhes</button>
 
         <div class="recipe-meta">
             <span><strong>Preparo:</strong> 40 min</span>
@@ -197,49 +189,52 @@
 
         <h2>Modo de Preparo</h2>
         <ol>
-            <li>No liquidificador, bata as cenouras picadas, os ovos e o óleo até obter uma mistura completamente homogênea.</li>
-            <li>Despeje essa mistura em uma tigela funda e adicione o açúcar, mexendo bem com uma colher ou batedor manual.</li>
-            <li>Acrescente a farinha de trigo aos poucos, peneirando para evitar grumos, e misture delicadamente até incorporar.</li>
-            <li>Por último, adicione o fermento em pó e misture suavemente com movimentos de baixo para cima.</li>
+            <li>No liquidificador, adicione as cenouras, os ovos e o óleo, depois misture bem até ficar homogêneo.</li>
+            <li>Acrescente o açúcar e bata por mais 2 minutos.</li>
         </ol>
     </div>
 
-    <!-- TELA 2: ÁREA DE ACOLHIMENTO (EXIBIDA APÓS O CLIQUE) -->
+    <!-- TELA PRINCIPAL: PAINEL DE ACOLHIMENTO E QUIZ (ROSA E LILÁS) -->
     <div id="painel-acolhimento">
-        
-        <!-- LOGO CORAÇÃO ROXO -->
-        <div class="logo-container">
-            <div class="coracao-roxo"></div>
-        </div>
+        <h1>Espaço de Apoio e Acolhimento</h1>
+        <p>Você não está sozinha. Utilize as ferramentas abaixo para buscar orientações ou ajuda imediata.</p>
 
-        <h2 style="text-align: center; color: #6c3483; border: none;">Espaço Unitário de Apoio</h2>
-        <p style="text-align: center; color: #555;">Você está em um ambiente seguro e sigiloso. Veja recursos de proteção abaixo:</p>
-        
-        <!-- CANAIS DE SOCORRO -->
+        <!-- Grade de Botões de Emergência com Chamada Direta e SMS -->
         <div class="grid-emergencia">
             <a href="tel:180" class="btn-emergencia btn-180">
-                Ligar 180
+                LIGAR 180
                 <span>Central de Atendimento à Mulher</span>
             </a>
-
             <a href="tel:190" class="btn-emergencia btn-190">
-                Ligar 190
+                LIGAR 190
                 <span>Polícia Militar (Emergência)</span>
             </a>
-
-            <!-- Botão de Mensagem Dinâmica -->
-            <a id="btn-whatsapp-dinamico" href="#" onclick="alert('Por favor, cadastre um contato de emergência no formulário abaixo primeiro.'); return false;" target="_blank" class="btn-emergencia btn-pessoal">
-                Enviar Mensagem de Emergência
-                <span id="txt-status-contato">Nenhum contato cadastrado</span>
-            </a>
+            <button onclick="enviarMensagemEmergencia()" class="btn-emergencia btn-pessoal">
+                🚨 ENVIAR MENSAGEM DE SOCORRO
+                <span id="txt-contato-status">Manda "preciso de ajuda" para o contato salvo</span>
+            </button>
         </div>
 
-        <!-- CADASTRO DE CONTATO DE EMBERGÊNCIA -->
+        <!-- Configuração do Contato de Emergência -->
         <div class="secao-box">
-            <h3>1. Cadastrar Contato de Emergência</h3>
-            <p style="font-size: 13px; color: #666;">Insira o número de alguém de total confiança. O número fica gravado de forma segura apenas neste navegador.</p>
+            <h3>Configurar Contato de Emergência</h3>
             <div class="form-grupo">
                 <label for="nome-emergencia">Nome do Contato:</label>
                 <input type="text" id="nome-emergencia" placeholder="Ex: Maria Amiga">
             </div>
             <div class="form-grupo">
+                <label for="tel-emergencia">Número do WhatsApp (com DDD, apenas números):</label>
+                <input type="tel" id="tel-emergencia" placeholder="Ex: 11999999999">
+            </div>
+            <button class="btn-salvar" onclick="salvarContato()">Salvar Contato</button>
+        </div>
+
+        <!-- QUIZ COM EXPLICAÇÕES (SEM VÍDEOS) -->
+        <div class="secao-box">
+            <h3>Quiz de Percepção: Identificando Sinais</h3>
+            
+            <!-- Pergunta 1 -->
+            <div class="quiz-pergunta">
+                <p><strong>1. O controle excessivo sobre suas roupas, horários ou amizades é considerado normal em um relacionamento saudável?</strong></p>
+                <div class="quiz-opcoes">
+                    <label><input type="radio" name="p1" value="errado" onclick="mostrarExplicacao('exp1')"> Sim, demonstra cuidado e ciúme saudável.</label>
