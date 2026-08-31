@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receitas Práticas - O Melhor Bolo de Cenoura</title>
     <style>
-        /* Estilos Gerais e Temáticos da Receita (Disfarce) */
+        /* Estilos do Disfarce (Receita) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -29,54 +29,46 @@
         ul, ol { padding-left: 20px; }
         li { margin-bottom: 8px; }
 
-        /* Botão de Entrada Visível */
+        /* Botão para mudar de tela */
         .btn-mais-detalhes {
             display: block;
             width: 100%;
             background-color: #e67e22;
             color: white;
             border: none;
-            padding: 14px;
+            padding: 15px;
             font-size: 16px;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
             margin-bottom: 25px;
             text-align: center;
-            transition: background 0.2s;
+            text-transform: uppercase;
         }
         .btn-mais-detalhes:hover { background-color: #d35400; }
 
-        /* =======================================================
-           TELA PRINCIPAL (PAINEL DE ACOLHIMENTO - ROSA E LILÁS)
-           ======================================================= */
-        #painel-acolhimento {
-            display: none; /* Ativado via JavaScript */
+        /* ==========================================
+           TELA PRINCIPAL (ROSA E LILÁS) - SECRETA
+           ========================================== */
+        #tela-principal {
+            display: none; /* Escondida inicialmente */
             max-width: 600px;
             margin: 60px auto 40px auto;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #fff5f8; /* Fundo Rosa bem claro */
+            background: #fff0f5; /* Fundo Rosa Suave */
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 2px solid #f0d5e2;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 3px solid #f3d1df;
         }
-
-        #painel-acolhimento h1 {
-            color: #d81b60; /* Rosa Escuro */
-        }
-        
-        #painel-acolhimento p {
-            color: #4a4a4a;
-            text-align: center;
-        }
+        #tela-principal h1 { color: #c2185b; } /* Título Rosa Escuro */
+        #tela-principal h3 { color: #7b1fa2; margin-top: 0; } /* Subtítulos Lilás */
 
         /* Botão de Saída Rápida Fixo */
         .btn-saida-rapida {
             position: fixed;
             top: 15px;
             right: 15px;
-            background-color: #c0392b;
+            background-color: #d32f2f;
             color: white;
             border: none;
             padding: 12px 24px;
@@ -84,21 +76,20 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 10000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 99999;
         }
-        .btn-saida-rapida:hover { background-color: #ae2717; }
 
         /* Grade de Botões de Emergência */
-        .grid-emergencia {
+        .grid-botoes {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
-            margin-top: 25px;
+            margin: 25px 0;
         }
-        @media(min-width: 480px) { .grid-emergencia { grid-template-columns: 1fr 1fr; } }
-        
-        .btn-emergencia {
+        @media(min-width: 480px) { .grid-botoes { grid-template-columns: 1fr 1fr; } }
+
+        .btn-call {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,68 +98,75 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 20px;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .btn-emergencia:hover { opacity: 0.9; transform: scale(1.02); }
+        .cor-180 { background-color: #8e24aa; } /* Lilás Forte */
+        .cor-190 { background-color: #e91e63; } /* Rosa Forte */
         
-        /* Cores dos botões de ligação ajustadas para o tema */
-        .btn-180 { background-color: #9c27b0; } /* Lilás / Roxo */
-        .btn-190 { background-color: #e91e63; } /* Rosa */
-        .btn-pessoal { background-color: #673ab7; grid-column: 1 / -1; } /* Roxo Profundo */
-        .btn-emergencia span { font-size: 13px; font-weight: normal; margin-top: 5px; opacity: 0.9; }
+        .btn-sms-emergencia {
+            grid-column: 1 / -1;
+            background-color: #4a148c; /* Roxo Escuro */
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-sms-emergencia span { display: block; font-size: 12px; font-weight: normal; margin-top: 4px; opacity: 0.8; }
 
-        /* Seções de Configuração e Quiz */
-        .secao-box {
-            background: #fff0f6; /* Fundo Rosa suave */
-            border: 1px solid #f3d1df;
+        /* Blocos de Conteúdo Interno */
+        .bloco-conteudo {
+            background: #fbe4ee; /* Mistura de rosa/lilás claro */
+            border: 1px solid #e1bee7;
             padding: 20px;
             border-radius: 8px;
-            margin-top: 30px;
+            margin-top: 25px;
         }
-        .secao-box h3 { color: #8e24aa; margin-top: 0; } /* Texto Lilás */
+
+        /* Formulário */
+        .campo-grupo { margin-bottom: 15px; }
+        .campo-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #4a4a4a; }
+        .campo-grupo input { width: 100%; padding: 12px; border: 1px solid #ce93d8; border-radius: 5px; box-sizing: border-box; }
+        .btn-acao-salvar { background: #7b1fa2; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; }
+
+        /* Estilo do Quiz */
+        .quiz-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #ce93d8; }
+        .quiz-item p { margin-bottom: 10px; font-weight: 600; }
+        .opcao-label { display: block; background: #fff; border: 1px solid #e1bee7; padding: 12px; margin-top: 8px; border-radius: 6px; cursor: pointer; }
+        .opcao-label:hover { background: #f3e5f5; }
+        .opcao-label input { margin-right: 10px; }
         
-        /* Formulários */
-        .form-grupo { margin-bottom: 15px; }
-        .form-grupo label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; color: #4a4a4a; }
-        .form-grupo input { width: 100%; padding: 10px; border: 1px solid #dcb5c9; border-radius: 5px; box-sizing: border-box; background: #fff; }
-        .btn-salvar { background: #d81b60; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
-        .btn-salvar:hover { background: #c2185b; }
-        
-        /* Quiz */
-        .quiz-pergunta { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #f3d1df; }
-        .quiz-opcoes label { display: block; background: #fff; border: 1px solid #f3d1df; padding: 12px; margin-top: 8px; border-radius: 5px; cursor: pointer; transition: background 0.2s; }
-        .quiz-opcoes label:hover { background: #fbe4ee; }
-        .quiz-opcoes input { margin-right: 10px; }
-        
-        /* Explicações e Respostas */
-        .explicacao {
-            margin-top: 10px;
+        /* Box de Explicação */
+        .box-explicacao {
+            margin-top: 12px;
             padding: 12px;
-            background-color: #f3e5f5; /* Lilás bem claro */
-            border-left: 4px solid #9c27b0;
+            background-color: #fff;
+            border-left: 4px solid #8e24aa;
             border-radius: 4px;
             font-size: 14px;
-            color: #3b3b3b;
-            display: none; /* Exibido após responder */
+            color: #333;
+            display: none; /* Revelado por clique */
         }
     </style>
 </head>
 <body>
 
-    <!-- BOTÃO DE SAÍDA RÁPIDA (Disponível em qualquer tela) -->
-    <button class="btn-saida-rapida" onclick="saidaRapida()">SAIR RÁPIDO (ESC)</button>
+    <!-- BOTÃO FIXO DE SAÍDA IMEDIATA -->
+    <button class="btn-saida-rapida" onclick="fecharSeguro()">SAÍDA RÁPIDA (ESC)</button>
 
-    <!-- TELA 1: SITE DISFARÇADO (RECEITA DE BOLO) -->
+    <!-- TELA 1: SITE DISFARÇADO (RECEITAS) -->
     <div id="tela-receita" class="container">
         <h1>Bolo de Cenoura de Liquidificador</h1>
         <div class="subtitle">A receita mais fofinha e prática para o seu café da tarde</div>
 
-        <!-- Botão de Transição Solicitado -->
-        <button class="btn-mais-detalhes" onclick="abrirTelaPrincipal()">Mais Detalhes</button>
+        <!-- Botão solicitado que faz a troca de tela -->
+        <button class="btn-mais-detalhes" onclick="mostrarPainelOculto()">Mais Detalhes</button>
 
         <div class="recipe-meta">
             <span><strong>Preparo:</strong> 40 min</span>
@@ -177,7 +175,7 @@
         </div>
 
         <h2>Ingredientes</h2>
-        <h3>Massa:</h3>
+        <h3>Massa do Bolo:</h3>
         <ul>
             <li>3 cenouras médias raspadas e picadas</li>
             <li>3 ovos inteiros</li>
@@ -189,52 +187,61 @@
 
         <h2>Modo de Preparo</h2>
         <ol>
-            <li>No liquidificador, adicione as cenouras, os ovos e o óleo, depois misture bem até ficar homogêneo.</li>
-            <li>Acrescente o açúcar e bata por mais 2 minutos.</li>
+            <li>No liquidificador, adicione as cenouras, os ovos e o óleo. Bata até a mistura ficar completamente lisa.</li>
+            <li>Despeje em uma tigela grande e adicione o açúcar misturando bem.</li>
+            <li>Peneire a farinha de trigo aos poucos, mexendo delicadamente de baixo para cima.</li>
         </ol>
     </div>
 
-    <!-- TELA PRINCIPAL: PAINEL DE ACOLHIMENTO E QUIZ (ROSA E LILÁS) -->
-    <div id="painel-acolhimento">
-        <h1>Espaço de Apoio e Acolhimento</h1>
-        <p>Você não está sozinha. Utilize as ferramentas abaixo para buscar orientações ou ajuda imediata.</p>
 
-        <!-- Grade de Botões de Emergência com Chamada Direta e SMS -->
-        <div class="grid-emergencia">
-            <a href="tel:180" class="btn-emergencia btn-180">
+    <!-- TELA 2: TELA PRINCIPAL DE APOIO (ROSA E LILÁS) -->
+    <div id="tela-principal">
+        <h1 style="text-align:center;">Painel de Orientação e Apoio</h1>
+        <p style="text-align:center; color:#555;">Espaço seguro para informações, ferramentas de apoio e conexões de emergência.</p>
+
+        <!-- Grade com Ligações e Alerta WhatsApp -->
+        <div class="grid-botoes">
+            <!-- Chamadas nativas diretas para redes de emergência -->
+            <a href="tel:180" class="btn-call cor-180">
                 LIGAR 180
-                <span>Central de Atendimento à Mulher</span>
+                <span style="font-size:12px; font-weight:normal; opacity:0.9;">Central de Atendimento</span>
             </a>
-            <a href="tel:190" class="btn-emergencia btn-190">
+            
+            <a href="tel:190" class="btn-call cor-190">
                 LIGAR 190
-                <span>Polícia Militar (Emergência)</span>
+                <span style="font-size:12px; font-weight:normal; opacity:0.9;">Polícia Militar</span>
             </a>
-            <button onclick="enviarMensagemEmergencia()" class="btn-emergencia btn-pessoal">
+
+            <!-- Botão do Contato Pessoal -->
+            <button class="btn-sms-emergencia" onclick="dispararAjudaWhatsApp()">
                 🚨 ENVIAR MENSAGEM DE SOCORRO
-                <span id="txt-contato-status">Manda "preciso de ajuda" para o contato salvo</span>
+                <span id="label-contato-atual">Mandar "preciso de ajuda" para o contato configurado</span>
             </button>
         </div>
 
-        <!-- Configuração do Contato de Emergência -->
-        <div class="secao-box">
+        <!-- Área de Configuração do Contato Salvo -->
+        <div class="bloco-conteudo">
             <h3>Configurar Contato de Emergência</h3>
-            <div class="form-grupo">
-                <label for="nome-emergencia">Nome do Contato:</label>
-                <input type="text" id="nome-emergencia" placeholder="Ex: Maria Amiga">
+            <div class="campo-grupo">
+                <label>Nome do contato confiável:</label>
+                <input type="text" id="input-nome" placeholder="Ex: Ana Amiga">
             </div>
-            <div class="form-grupo">
-                <label for="tel-emergencia">Número do WhatsApp (com DDD, apenas números):</label>
-                <input type="tel" id="tel-emergencia" placeholder="Ex: 11999999999">
+            <div class="campo-grupo">
+                <label>WhatsApp (DDD + Número, apenas números):</label>
+                <input type="tel" id="input-telefone" placeholder="Ex: 11999999999">
             </div>
-            <button class="btn-salvar" onclick="salvarContato()">Salvar Contato</button>
+            <button class="btn-acao-salvar" onclick="gravarContatoLocal()">Salvar Configurações</button>
         </div>
 
-        <!-- QUIZ COM EXPLICAÇÕES (SEM VÍDEOS) -->
-        <div class="secao-box">
-            <h3>Quiz de Percepção: Identificando Sinais</h3>
+        <!-- Seção do Quiz com Explicações Técnicas (Sem vídeos) -->
+        <div class="bloco-conteudo">
+            <h3>Quiz de Informação e Resguardo</h3>
             
             <!-- Pergunta 1 -->
-            <div class="quiz-pergunta">
-                <p><strong>1. O controle excessivo sobre suas roupas, horários ou amizades é considerado normal em um relacionamento saudável?</strong></p>
-                <div class="quiz-opcoes">
-                    <label><input type="radio" name="p1" value="errado" onclick="mostrarExplicacao('exp1')"> Sim, demonstra cuidado e ciúme saudável.</label>
+            <div class="quiz-item">
+                <p>1. Monitorar conversas no celular, proibir visitas a familiares ou controlar o dinheiro do parceiro é considerado uma relação normal?</p>
+                <label class="opcao-label">
+                    <input type="radio" name="pergunta1" onclick="exibirResposta('res1')"> 
+                    Sim, é apenas excesso de zelo e proteção de quem ama.
+                </label>
+                <label class="opcao-label">
